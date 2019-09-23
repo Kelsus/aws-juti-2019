@@ -26,14 +26,6 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
 
   `npm install serverless -g`
 
-  **Clonar el proyecto**
-
-  Situar la terminal en la carpeta deseada y correr:
-  `git clone {url del proyecto}`
-
-  Entrar a la carpeta del proyecto
-  `cd notes-app-api`
-
   **Instalar paquetes Node.js**
 
   Para instalar las dependencias del proyecto:
@@ -92,7 +84,8 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
 
 ## Deploy de las APIs
 
-Ahora que nuestra API esta completa, podemos hacer deploy de la misma:
+Una vez que nuestra API esté completa, podemos hacer deploy de la misma:
+
 `serverless deploy`
 
 Al finalizar, podremos encontrar en el output del comando la sección `Service Information`
