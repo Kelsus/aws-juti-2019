@@ -2,11 +2,34 @@
 
 Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS. Basado en el tutorial [Serverless Stack](http://serverless-stack.com).
 
-## Setup inicial
+## Requisitos
 
- **Instalar paquetes**
+  - Cuenta en AWS con acccess keys configuradas en AWS CLI.
+  - Servicio API configurado en API Gateway con autenticación mediante API key.
+  - Bucket público en S3.
 
-   Para instalar las dependencias del proyecto:
+  Para configurar el Bucket de S3 como público, debe configurarse la siguiente Bucket Policy:
+
+  ```
+  {
+    "Version":"2012-10-17",
+    "Statement":[
+      {
+        "Sid":"PublicReadForGetBucketObjects",
+        "Effect":"Allow",
+        "Principal": "*",
+        "Action":["s3:GetObject"],
+        "Resource":["arn:aws:s3:::YOUR_BUCKET_NAME/*"]
+      }
+    ]
+  }
+  ```
+
+  Donde YOUR_BUCKET_NAME debe reemplazarse por el nombre del bucket.
+
+## Instalar paquetes
+
+  Para instalar las dependencias del proyecto:
 
   `npm install`
 
@@ -29,10 +52,6 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
 
   ```
   export default {
-    auth: {
-      ACCESS_KEY_ID: "YOUR_AWS_USER_ACCESS_KEY_ID",
-      SECRET_ACCESS_KEY: "YOUR_AWS_USER_SECRET_ACCESS_KEY"
-    },
     apiGateway: {
       REGION: "YOUR_API_GATEWAY_REGION",
       URL: "YOUR_API_GATEWAY_URL",
@@ -42,10 +61,6 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
   ```
   
   Donde hay que reemplazar:
-
-  - YOUR_AWS_USER_ACCESS_KEY_ID por el `access_key_id` provisto al usuario de AWS.
-
-  - YOUR_AWS_USER_SECRET_ACCESS_KEY por el `secret_access_key` provisto al usuario de AWS.
 
   - YOUR_API_GATEWAY_REGION por la región de nuestro API Gateway creado en el deploy (en nuestro caso será `us-west-1`).
 
@@ -76,12 +91,7 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
           endpoint: config.apiGateway.URL,
           region: config.apiGateway.REGION
         },
-      ],
-      credentials: {
-        accessKeyId: config.auth.ACCESS_KEY_ID,
-        secretAccessKey: config.auth.SECRET_ACCESS_KEY
-      },
-    }
+      ]
   });
   ```
 

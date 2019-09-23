@@ -2,6 +2,11 @@
 
 Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS. Basado en el tutorial [Serverless Stack](http://serverless-stack.com).
 
+## Requisitos
+
+  - Cuenta en AWS con acccess keys
+  - Tabla de notas en DynamoDB
+
 ## Configurar la cuenta de AWS CLI
 
 **Instalar AWS CLI**
@@ -34,32 +39,74 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
 
   **Configurar los endpoints**
 
-  El proyecto incluye todo el código necesario para nuestra API. Lo que resta es agregar la configuración necesaria para crear el Stack en AWS.
+  El proyecto incluye todo el código necesario para nuestra API. Lo que resta es agregar la configuración necesaria para crear el Stack en AWS en el archivo `serverless.yml`.
 
-  Para cada función de la API debemos:
+  Comenzaremos por describir las propiedades comunes a todas nuestras funciones. Para ello, debemos agregar una sección `provider`:
+
+  ```
+  provider:
+    name: aws
+    runtime: nodejs10.x
+    stage: dev
+    region: us-west-1
+    apiKeys:
+      - ${self:custom.clientName}
+
+    # Defines the environment variables for our functions.
+    environment:
+      tableName: ${self:custom.tableName}
+      stripeSecretKey: ${self:custom.environment.stripeSecretKey}
+
+    # 'iamRoleStatements' defines the permission policy for the Lambda function.
+    # In this case Lambda functions are granted with permissions to access DynamoDB.
+    iamRoleStatements:
+        - Effect: Allow
+          Action:
+            - dynamodb:DescribeTable
+            - dynamodb:Query 
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          # Restrict our IAM role permissions to
+          # the specific table for the stage.
+          Resource: YOUR_DYNAMODB_TABLE_ARN
+  ```
+
+  Donde en la línea final, reemplazamos YOUR_DYNAMODB_TABLE_ARN con el ARN de nuestra tabla de notas en AWS.
+
+  Aquí estamos definiendo entre, otras cosas: 
+  - El runtime a utilizar. 
+  - La región para nuestras funciones.
+  - Que queremos generar un API Gateway API key para nuestro cliente.
+  - Las variables de entorno a crear.
+  - La policy de IAM que utilizarán las funciones para hacer uso de otros recursos de AWS.
+
+  Además, para cada función de la API debemos:
 
   - **Describir la función en el archivo serverless.yml**
 
-  Debemos crear una sección `functions` en nuestra configuración y dentro de ésta describir las propiedades de nuestras funciones.
+  Creamos una sección `functions` en nuestra configuración y dentro de ésta describiremos las propiedades de nuestras funciones.
 
   Por ejemplo, para la función create.js:
 
   ```
   functions:
-  # Defines an HTTP API endpoint that calls the main function in create.js
-  # - path: url path is /notes
-  # - method: POST request
-  # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
-  #     domain api call
-  # - private: defines this function as private and require an API Gateway API key to invoke it
-  create:
-    handler: create.main
-    events:
-      - http:
-          path: notes
-          method: post
-          cors: true
-          private: true
+    # Defines an HTTP API endpoint that calls the main function in create.js
+    # - path: url path is /notes
+    # - method: POST request
+    # - cors: enabled CORS (Cross-Origin Resource Sharing) for browser cross
+    #     domain api call
+    # - private: defines this function as private and require an API Gateway API key to invoke it
+    create:
+      handler: create.main
+      events:
+        - http:
+            path: notes
+            method: post
+            cors: true
+            private: true
   ```
 
   - **Probar la función localmente**
