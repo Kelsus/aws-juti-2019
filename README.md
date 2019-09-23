@@ -1,6 +1,8 @@
 # Workshop JUTI 2019
 
-## [ECS](./ecs/README.md)
+## ECS
+
+  - [API](./ecs/README.md)
 
 ## Serverless
 
