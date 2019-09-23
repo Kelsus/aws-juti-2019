@@ -7,14 +7,17 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
   **Clonar el proyecto**
 
   Situar la terminal en la carpeta deseada y correr:
+
   `git clone {url del proyecto}`
 
   Entrar a la carpeta del proyecto
+
   `cd notes-app-api`
 
  **Instalar paquetes**
 
    Para instalar las dependencias del proyecto:
+
   `npm install`
 
 
@@ -47,7 +50,7 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
     }
   };
   ```
-
+  
   Donde hay que reemplazar:
 
   - YOUR_AWS_USER_ACCESS_KEY_ID por el `access_key_id` provisto al usuario de AWS.
