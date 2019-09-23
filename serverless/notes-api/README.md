@@ -29,9 +29,8 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
   **Instalar paquetes Node.js**
 
   Para instalar las dependencias del proyecto:
-  `npm install`
 
-  **Configurar nuestro stack**
+  `npm install`
 
   **Configurar los endpoints**
 
