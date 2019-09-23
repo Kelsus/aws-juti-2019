@@ -4,16 +4,6 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
 
 ## Setup inicial
 
-  **Clonar el proyecto**
-
-  Situar la terminal en la carpeta deseada y correr:
-
-  `git clone {url del proyecto}`
-
-  Entrar a la carpeta del proyecto
-
-  `cd notes-app-api`
-
  **Instalar paquetes**
 
    Para instalar las dependencias del proyecto:
@@ -136,7 +126,7 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
 
   `aws s3 sync build/ s3://YOUR_S3_DEPLOY_BUCKET_NAME`
 
-  Donde YOUR_S3_DEPLOY_BUCKET_NAME` es el nombre de nuestro bucket en S3.
+  Donde YOUR_S3_DEPLOY_BUCKET_NAME es el nombre de nuestro bucket en S3.
 
   En caso de que nuestro bucket S3 no esté vacío, o que querramos actualizar el contenido de nuestra aplicación, podemos hacer un re-deploy corriendo:
 
