@@ -2,16 +2,38 @@
 
 Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS. Basado en el tutorial [Serverless Stack](http://serverless-stack.com).
 
+## Instalaciones previas
+
+  **Windows**
+
+  - Nodejs: https://nodejs.org/en/download/
+
+  - awscli: https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html#install-msi-on-windows
+
+  **Ubuntu**
+
+  - Nodejs:
+
+    ```
+    sudo apt-get install curl
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+    sudo apt-get install nodejs
+    ```
+
+  - awscli:
+
+    ```
+    sudo apt install python3-pip
+    sudo pip install awscli    
+    ```
+
+
 ## Requisitos
 
   - Cuenta en AWS con acccess keys
   - Tabla de notas en DynamoDB
 
 ## Configurar la cuenta de AWS CLI
-
-**Instalar AWS CLI**
-
-`sudo pip install awscli`
 
 **Configurar claves de acceso**
 
