@@ -1,1 +1,3 @@
-# aws-juti-2019
+# Workshop JUTI 2019
+
+## [ECS](./ecs/README.md)
