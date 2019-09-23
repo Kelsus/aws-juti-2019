@@ -5,9 +5,11 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
 ## Configurar la cuenta de AWS CLI
 
 **Instalar AWS CLI**
+
 `sudo pip install awscli`
 
 **Configurar claves de acceso**
+
   Necesitamos decirle a AWS CLI que use las claves de acceso generadas para nuestro usuario.
 
   Estas lucen así:
@@ -40,11 +42,13 @@ Proyecto de ejemplo que demuestra el uso de funciones Lambda con DynamoDB en AWS
   **Configurar nuestro stack**
 
   **Configurar los endpoints**
+
   El proyecto incluye todo el código necesario para nuestra API. Lo que resta es agregar la configuración necesaria para crear el Stack en AWS.
 
   Para cada función de la API debemos:
 
   - **Describir la función en el archivo serverless.yml**
+
   Debemos crear una sección `functions` en nuestra configuración y dentro de ésta describir las propiedades de nuestras funciones.
 
   Por ejemplo, para la función create.js:
@@ -120,35 +124,10 @@ Esta es una lista de nuestros endpoints creados. Toma nota de estos ya que vamos
 También toma nota de la región y la api key generada para este endpoint.
 
 ## Deploy de una sola función
+
 Puede darse que necesites hacer deploy de un solo endpoint API en lugar de todos a la vez.
 En ese caso, podemos usar el comando `serverless deploy function` para hacerlo, sin tener que pasar por el ciclo entero de deploy. Esto es mucho más rápido a la hora de hacer cambios en nuestras funciones
 
 Por ejemplo, si quisieramos hacer deploy de la funcion `list` de nuevo, podemos correr:
 
 `serverless deploy function -f list`
-
-sudo pip install awscli
-
-npm install -g serverless
-
-git clone https://github.com/julianrd/serverless-notes-api.git
-
-cd serverless-notes-api
-
-git checkout juti-workshop
-
-npm install 
-
-serverless deploy --aws-profile juti
-
-cd ..
-
-git clone https://github.com/julianrd/serverless-notes-client.git
-
-git checkout juti-workshop
-
-npm install
-
-npm run build
-
-aws s3 sync build/ s3://alpha-notes-client
